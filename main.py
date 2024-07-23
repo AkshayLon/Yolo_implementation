@@ -1,6 +1,6 @@
 import torch
 from yolo_implementation import yolov1, CustomLoss
-from generate_data import ImageDataset
+from generate_data import TrainingDataset, TestingDataset
 from torch.utils.data import DataLoader
 import torch.optim as optim
 
@@ -8,7 +8,7 @@ if __name__=="__main__":
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     print(device)
     model = yolov1().to(device)
-    image_data = ImageDataset()
+    image_data = TrainingDataset()
     criterion = CustomLoss()
     image_loader = DataLoader(dataset=image_data, batch_size=1)
     optimizer = optim.SGD(model.parameters(), lr=0.0025)
